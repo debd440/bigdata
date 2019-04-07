@@ -1,0 +1,5 @@
+com/deb/hadoop/WordCountReducer.class
+com/deb/hbase/HBaseDMLExample.class
+com/deb/hbase/HBaseDDLExample.class
+com/deb/hadoop/WordCountTest.class
+com/deb/hadoop/WordCountMapper.class
