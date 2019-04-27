@@ -23,7 +23,7 @@ public class HBaseDDLExample {
 	private String personalCF = "personal";
 	private String professionalCF = "professional";
 
-	public static void main1(String[] args) {
+	public static void main(String[] args) {
 
 		HBaseDDLExample example = new HBaseDDLExample();
 		try {

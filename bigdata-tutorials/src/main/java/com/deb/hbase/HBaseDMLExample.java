@@ -40,7 +40,7 @@ public class HBaseDMLExample {
 	private final byte[] rowIdemtifier2 = Bytes.toBytes(2);
 	private final byte[] rowIdemtifier3 = Bytes.toBytes(3);
 
-	public static void main1(String[] args) {
+	public static void main(String[] args) {
 
 		HBaseDMLExample example = new HBaseDMLExample();
 		try {

@@ -1,5 +1,8 @@
 package com.deb.hadoop.inputformat;
 
+import java.io.FileReader;
+import java.util.Properties;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
 import org.apache.hadoop.fs.Path;
@@ -28,6 +31,13 @@ public class StudentTest extends Configured implements Tool {
 	@Override
 	public int run(String[] args) throws Exception {
 
+		FileReader reader = new FileReader(
+				"/home/debdutta/HadoopEnviornment/codebase/bigdata-tutorials/src/main/resources/hadoop.properties");
+		Properties p = new Properties();
+		p.load(reader);
+		String input = p.getProperty("input_path");
+		String output = p.getProperty("output_path");
+
 		Configuration configuration = new Configuration();
 		configuration.setStrings("entity", "B2C Technology");
 		Job job = Job.getInstance(configuration, "Student Test");
@@ -35,8 +45,8 @@ public class StudentTest extends Configured implements Tool {
 		job.setJarByClass(StudentTest.class);
 		job.setMapperClass(StudentMapper.class);
 		job.setReducerClass(StudentReducer.class);
-		job.setCombinerClass(StudentCombiner.class);
-		
+		//job.setCombinerClass(StudentCombiner.class);
+
 		job.setInputFormatClass(TextInputFormat.class);
 		job.setOutputFormatClass(TextOutputFormat.class);
 
@@ -46,8 +56,8 @@ public class StudentTest extends Configured implements Tool {
 		job.setOutputKeyClass(StudentWritable.class);
 		job.setOutputValueClass(IntWritable.class);
 
-		FileInputFormat.addInputPath(job, new Path("/user/root/input/student.txt"));
-		FileOutputFormat.setOutputPath(job, new Path("/user/root/output/inputformat/"));
+		FileInputFormat.addInputPath(job, new Path(input));
+		FileOutputFormat.setOutputPath(job, new Path(output));
 
 		int result = job.waitForCompletion(true) ? 0 : 1;
 		long noOfStudent = job.getCounters().findCounter(StudentEnum.NO_OF_STUDENT).getValue();
