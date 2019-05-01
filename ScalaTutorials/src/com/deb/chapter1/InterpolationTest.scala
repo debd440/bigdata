@@ -14,6 +14,7 @@ object InterpolationTest {
     println("*****************************")
     println("Example 2: Evaluate Expression");
     var nItem = 10
+    println(s"The Expression is: ${2 + 2}")
     println(s"The Expression is: ${nItem == 10}")
     println(s"The Expression is: ${nItem == 15}")
 
@@ -30,13 +31,13 @@ object InterpolationTest {
     //Example 4
     println("*****************************")
     println("Example 4: Raw Text");
-    println(s"Normal Text = $item1")
-    println(raw"Raw Text = $item1")
+    println(s"Normal Text \t = $item1")
+    println(raw"Raw Text \t = $item1")
 
     //Example 5
     println("*****************************")
-    println("Example 5: Case Class");
-    var bmw = Car("BMW", 150000)
+    println("Example 5: Case Class")
+    var bmw: Car = Car("BMW", 150000)
     println(s"Car Model: ${bmw.model} \t Price: ${bmw.price}")
   }
 

@@ -7,9 +7,10 @@ object VariableTest {
 
     //Example 1
     println("*****************************")
-    println("Example 1: Immutable Variable");
-    val imItem = 5;
+    println("Example 1: Immutable Variable")
+    val imItem = 5
     //imItem=7 //Error
+    println("The Immutable Variable Value is: " + imItem)
     println(s"The Immutable Variable Value is: $imItem")
 
     //Example 2
@@ -21,14 +22,14 @@ object VariableTest {
 
     //Example 3
     println("*****************************")
-    println("Example 3: Lazy initialization");
+    println("Example 3: Lazy initialization")
     lazy val lItem = "Lazy Variable"
     //lazy var lItem="Lazy Variable" //Error
     println(s"The Lazy Variable Value is: $lItem")
 
     //Example 4
     println("*****************************")
-    println("Example 4: Different Type Of Variable");
+    println("Example 4: Different Type Of Variable")
     var type1: Any = "Any"
     var type2: AnyVal = 12
     var type3: AnyRef = "AnyRef"
@@ -45,7 +46,8 @@ object VariableTest {
 
     //Example 5
     println("*****************************")
-    println("Example 5: Wildcard Operator");
+    println("Example 5: Wildcard Operator")
+    println(s"The Wildcard Variable Value Before Assignment is: $wItem")
     wItem = "Hello Wildcard Operator"
     println(s"The Wildcard Variable Value is: $wItem")
   }
