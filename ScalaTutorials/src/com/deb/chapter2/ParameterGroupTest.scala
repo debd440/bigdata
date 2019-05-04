@@ -18,8 +18,8 @@ object ParameterGroupTest {
     println("*****************************")
     println("Example 3: Partial Param Group Example")
     val partialCost = totalCost("Mango") _
-    println(s"Total cost for Mango ${partialCost(10)(0.1)}")
-
+    println(s"Total cost for Mango in Karnataka ${partialCost(10)(0.1)}")
+    println(s"Total cost for Mango in Goa ${partialCost(10)(0.2)}")
   }
 
   def totalCost(item: String)(quantity: Int)(discount: Double): Double = {

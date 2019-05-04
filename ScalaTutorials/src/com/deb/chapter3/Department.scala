@@ -5,7 +5,7 @@ class Department(name: String, noOfStudents: Int) {
   var code = ""
 
   def this(name: String, noOfStudents: Int, code: String) {
-    this(null, 0)
+    this(name, noOfStudents)
     this.code = code
   }
 

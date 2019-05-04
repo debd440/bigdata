@@ -61,8 +61,8 @@ object FunctionTest {
 
   def funcWoParenthesis = "Function Without Parenthesis"
 
-  def funcWoReturn() = {
-    println("Does NOT Have Any Return Type")
+  def funcWoReturn():Unit = {
+    println("Does Not Have Any Return Type")
   }
 
   def funcWParam(model: String, price: Int): Unit = {

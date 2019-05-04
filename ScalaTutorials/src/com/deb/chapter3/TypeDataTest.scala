@@ -6,7 +6,7 @@ object TypeDataTest {
     //Example 1
     println("*****************************")
     println("Example 1: Type Example")
-     var bmw = Car("BMW", 5000)
+    var bmw = Car("BMW", 5000)
     type CarList = Tuple2[Car, Int]
 
     var carDetais = new CarList(bmw, 4)
