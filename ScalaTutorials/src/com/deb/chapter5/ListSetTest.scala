@@ -28,7 +28,7 @@ object ListSetTest {
     //Example 3
     println("*****************************")
     println("Example 3: Add Single Duplicate Element Example")
-      techList = techList + "Go"
+    techList = techList + "Go"
     techList = techList + "Java"
     techList.foreach(item => {
       println(s"The Item Is: $item")

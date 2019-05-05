@@ -62,5 +62,5 @@ object TreeSetTest {
 }
 
 object AlphabetOrdering extends Ordering[String] {
-  def compare(element1: String, element2: String) = element1.compareTo(element2)
+  def compare(element1: String, element2: String) = element2.compareTo(element1)
 }

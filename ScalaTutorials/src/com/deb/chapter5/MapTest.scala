@@ -17,7 +17,7 @@ object MapTest {
     println("Example 2: Concat Two Map Example")
     var result = techMap ++ dbMap
     result.foreach(item => {
-      println(s"The Item Is: $item")
+      println(s"The Item Is: ${item}")
     })
 
     //Example 3
