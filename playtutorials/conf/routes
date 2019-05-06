@@ -1,0 +1,34 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# https://www.playframework.com/documentation/latest/ScalaRouting
+# ~~~~
+
+# An example controller showing a sample home page
+GET    /                            controllers.HomeController.index
+
+#Sample Web Controller Request
+
+#URL: http://localhost:9000/apis/path-param/12/Deb
+GET    /apis/path-param/:id/:name   com.deb.b2c.controllers.WebController.pathParam(id :Long, name:String)
+#URl: http://localhost:9000/apis/query-param?id=12&name=B2C
+GET    /apis/query-param            com.deb.b2c.controllers.WebController.queryParam(id: Long, name:String)
+#URL: http://localhost:9000/apis/post-request
+#REQUEST: {"id":12,"name":"Deb"}
+POST   /apis/post-request           com.deb.b2c.controllers.WebController.postRequest()
+#URL: http://localhost:9000/apis/post-request
+#REQUEST: {"id":12,"name":"Deb"}
+GET    /apis/json-response          com.deb.b2c.controllers.WebController.jsonResponse()
+#Response With Headers
+#URl: http://localhost:9000/apis/resopnse-headers?id=12&name=B2C
+GET    /apis/resopnse-headers       com.deb.b2c.controllers.WebController.responseWithHeader(id: Long, name:String)
+#Interceptor
+
+
+
+
+
+
+
+
+# Map static resources from the /public folder to the /assets URL path
+GET    /assets/*file                controllers.Assets.versioned(path="/public", file: Asset)
