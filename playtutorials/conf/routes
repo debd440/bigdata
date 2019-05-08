@@ -4,34 +4,37 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET    /                            controllers.HomeController.index
+GET      /                            controllers.HomeController.index
 
 #Sample Web Controller Request
 
 #URL: http://localhost:9000/apis/path-param/12/Deb
-GET    /apis/path-param/:id/:name   com.deb.b2c.controllers.WebController.pathParam(id :Long, name:String)
+GET      /apis/path-param/:id/:name   com.deb.b2c.controllers.WebController.pathParam(id :Long, name:String)
 #URl: http://localhost:9000/apis/query-param?id=12&name=B2C
-GET    /apis/query-param            com.deb.b2c.controllers.WebController.queryParam(id: Long, name:String)
+GET      /apis/query-param            com.deb.b2c.controllers.WebController.queryParam(id: Long, name:String)
 #URL: http://localhost:9000/apis/post-request
 #REQUEST: {"id":12,"name":"Deb"}
-POST   /apis/post-request           com.deb.b2c.controllers.WebController.postRequest()
+POST     /apis/post-request           com.deb.b2c.controllers.WebController.postRequest()
 #URL: http://localhost:9000/apis/post-request
 #REQUEST: {"id":12,"name":"Deb"}
-GET    /apis/json-response          com.deb.b2c.controllers.WebController.jsonResponse()
+GET      /apis/json-response          com.deb.b2c.controllers.WebController.jsonResponse()
 #Response With Headers
 #URl: http://localhost:9000/apis/resopnse-headers?id=12&name=B2C
-GET    /apis/resopnse-headers       com.deb.b2c.controllers.WebController.responseWithHeader(id: Long, name:String)
+GET      /apis/resopnse-headers       com.deb.b2c.controllers.WebController.responseWithHeader(id: Long, name:String)
 #Interceptor
 
 
 
+
 #CRUD Opration
-
-
-
+POST     /apis/student                com.deb.b2c.controllers.StudentController.addStudent()
+PUT      /apis/student                com.deb.b2c.controllers.StudentController.updateStudent()
+GET      /apis/student/:id            com.deb.b2c.controllers.StudentController.getStudent(id: Int)
+GET      /apis/student                com.deb.b2c.controllers.StudentController.getAllStudent()
+DELETE   /apis/student/:id                com.deb.b2c.controllers.StudentController.deleteStudent(id:Int)
 
 
 
 
 # Map static resources from the /public folder to the /assets URL path
-GET    /assets/*file                controllers.Assets.versioned(path="/public", file: Asset)
+GET      /assets/*file                controllers.Assets.versioned(path="/public", file: Asset)
