@@ -12,6 +12,10 @@ import play.api.db.slick.DatabaseConfigProvider
 import play.api.db.slick.HasDatabaseConfigProvider
 import play.db.NamedDatabase
 import slick.jdbc.JdbcProfile
+import com.deb.b2c.model.StudentObj
+import slick.jdbc.GetResult
+import com.deb.b2c.model.StudentSearchCriteria
+import com.deb.b2c.model.StudentTO
 
 @Singleton
 class StudentDAOImpl @Inject() (@NamedDatabase("play") protected val dbConfigProvider: DatabaseConfigProvider) extends HasDatabaseConfigProvider[JdbcProfile] with IStudentDAO {
@@ -68,5 +72,34 @@ class StudentDAOImpl @Inject() (@NamedDatabase("play") protected val dbConfigPro
     println(s"In DAO Layer: deleteStudent - $id")
     val query = student.filter(_.id === id).delete
     dbConfig.db.run(query)
+  }
+
+  def searchStudent(seachObj: StudentSearchCriteria): Future[Seq[StudentTO]] = {
+
+    println(s"In DAO Layer: searchStudent -Name ${seachObj.name.get} ::  City: ${seachObj.city.get} :: Mobile: ${seachObj.mobile.get}")
+    var query = student.sortBy(p => p.id desc)
+
+    if (seachObj.name.isDefined) {
+      query = student.filter(_.name === seachObj.name)
+    }
+    if (seachObj.city.isDefined) {
+      query = student.filter(_.city === seachObj.city)
+    }
+    if (seachObj.mobile.isDefined) {
+      query = student.filter(_.mobile === seachObj.mobile)
+      //query = student.filter(p => p.mobile === seachObj.mobile && p.city === seachObj.city)
+    }
+
+    println(s"Query We have: $query")
+    dbConfig.db.run(query.result)
+  }
+
+  implicit val getStudentObjResult = GetResult(r => StudentObj(r.<<, r.<<))
+
+  override def getCustomStudent(id: Int): Future[Option[StudentObj]] = {
+
+    println(s"In DAO Layer: getCustomStudent - $id")
+    val action = sql"""SELECT NAME,CITY FROM STUDENT WHERE ID = $id""".as[StudentObj]
+    db.run(action.headOption)
   }
 }

@@ -5,6 +5,8 @@ import com.deb.b2c.presistant.IStudentDAO
 import scala.concurrent.Future
 import com.deb.b2c.model.StudentTO
 import com.google.inject.Inject
+import com.deb.b2c.model.StudentObj
+import com.deb.b2c.model.StudentSearchCriteria
 
 @Singleton
 class StudentServiceImpl @Inject() (iStudentDAO: IStudentDAO) extends IStudentService {
@@ -37,5 +39,17 @@ class StudentServiceImpl @Inject() (iStudentDAO: IStudentDAO) extends IStudentSe
 
     println("In Service Layer: deleteStudent")
     iStudentDAO.deleteStudent(id)
+  }
+  
+  def searchStudent(seachObj: StudentSearchCriteria): Future[Seq[StudentTO]]={
+    
+     println("In Service Layer: searchStudent")
+    iStudentDAO.searchStudent(seachObj)
+  }
+
+  def getCustomStudent(id: Int): Future[Option[StudentObj]] = {
+    
+    println("In Service Layer: getCustomStudent")
+    iStudentDAO.getCustomStudent(id)
   }
 }

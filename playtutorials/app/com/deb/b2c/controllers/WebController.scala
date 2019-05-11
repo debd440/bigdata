@@ -19,7 +19,7 @@ class WebController @Inject() (cc: ControllerComponents, ec: ExecutionContext) e
     Ok(s"Path Param Values Are: Id: $id and Name: $name ")
   }
 
-  def queryParam(id: Long, name: String) = Action {
+  def queryParam(id: Long, name: String) = Action { 
     Ok(s"Query Param Values Are: Id: $id and Name: $name ")
   }
 

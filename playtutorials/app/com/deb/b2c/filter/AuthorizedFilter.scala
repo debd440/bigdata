@@ -14,7 +14,7 @@ class AuthorizedFilter @Inject() (implicit val mat: Materializer, ec: ExecutionC
     val url = request.path
     val method = request.method
     val reqRefId = request.headers.get("reqRefId").getOrElse(null)
-    println(s"Received Details: URL: $url, Method: $method, ReqRefId: $reqRefId")
+    println(s"B2C:::::Received Details: URL: $url, Method: $method, ReqRefId: $reqRefId")
     next(request)
   }
 }

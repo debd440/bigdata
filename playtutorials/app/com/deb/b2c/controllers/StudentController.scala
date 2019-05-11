@@ -9,6 +9,7 @@ import play.api.libs.json.Json
 import com.deb.b2c.model.StudentTO
 import scala.concurrent.ExecutionContext.Implicits.global
 import com.deb.b2c.service.IStudentService
+import com.deb.b2c.model.StudentSearchCriteria
 
 @Singleton
 class StudentController @Inject() (cc: ControllerComponents, ec: ExecutionContext, iStudentService: IStudentService) extends AbstractController(cc) {
@@ -57,6 +58,26 @@ class StudentController @Inject() (cc: ControllerComponents, ec: ExecutionContex
 
     println("Received Request-deleteStudent")
     var result = iStudentService.deleteStudent(id)
+    result.map({ obj =>
+      Ok(Json.toJson(obj))
+    })
+  }
+
+  def searchStudent() = Action.async { implicit request =>
+
+    println("Received Request-searchStudent")
+    val jsonBody = request.body.asJson.get
+    var seachObj = jsonBody.as[StudentSearchCriteria]
+    var result = iStudentService.searchStudent(seachObj)
+    result.map({ obj =>
+      Ok(Json.toJson(obj))
+    })
+  }
+
+  def getCustomStudent(id: Int) = Action.async { implicit request =>
+
+    println("Received Request-getCustomStudent")
+    var result = iStudentService.getCustomStudent(id)
     result.map({ obj =>
       Ok(Json.toJson(obj))
     })
