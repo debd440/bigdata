@@ -5,21 +5,28 @@ import org.apache.spark.SparkContext
 import org.apache.spark.streaming.StreamingContext
 import org.apache.spark.streaming.Seconds
 
-object FileStreamTest {
+object NetcatTest {
+
+  //To Run Netcat - nc -lk 9998
+
+  def setupLogging() = {
+
+    import org.apache.log4j.{ Level, Logger }
+    val rootLogger = Logger.getRootLogger()
+    rootLogger.setLevel(Level.ERROR)
+  }
 
   def main(args: Array[String]): Unit = {
 
     var sparkConfig = new SparkConf().setMaster("local").setAppName("FileStreamTest")
    // var sparkContext = new SparkContext(sparkConfig)
     //sparkContext.setLogLevel("info")
+    //setupLogging()
 
-    var streamingContext = new StreamingContext(sparkConfig, Seconds(20))
-    //Hdfs Location "hdfs://localhost:9000/user/root/input/b2c.txt"
-    var result = streamingContext.textFileStream("hdfs://localhost:9000/user/root/spark/input/")
-    var words = result.flatMap(_.split(" ")).map((_, 1)).reduceByKey(_ + _)
+    var streamingContext = new StreamingContext(sparkConfig, Seconds(5))
+    var result = streamingContext.socketTextStream("localhost", 9996).flatMap(_.split(" ")).map((_, 1)).reduceByKey(_ + _)
 
-    words.print()
-    //  result.saveAsTextFiles("file:///home/debdutta/HadoopEnviornment/data/spark/output/result.txt")
+    result.print
     streamingContext.start
     streamingContext.awaitTermination
   }
