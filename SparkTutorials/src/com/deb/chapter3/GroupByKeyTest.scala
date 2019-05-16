@@ -8,7 +8,7 @@ object GroupByKeyTest {
   //Paird RDDs- Group based on key
   def main(args: Array[String]): Unit = {
 
-    var sparkConfig = new SparkConf().setMaster("local").setAppName("BroadcastTest")
+    var sparkConfig = new SparkConf().setMaster("local").setAppName("GroupByKeyTest")
     var sparkContext = new SparkContext(sparkConfig)
     sparkContext.setLogLevel("info")
 

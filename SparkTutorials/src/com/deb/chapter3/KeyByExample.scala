@@ -8,7 +8,7 @@ object KeyByExample {
   //Convert Into Paired RDD By Executing Function
   def main(args: Array[String]): Unit = {
 
-    var sparkConfig = new SparkConf().setMaster("local").setAppName("BroadcastTest")
+    var sparkConfig = new SparkConf().setMaster("local").setAppName("KeyByExample")
     var sparkContext = new SparkContext(sparkConfig)
     sparkContext.setLogLevel("info")
 

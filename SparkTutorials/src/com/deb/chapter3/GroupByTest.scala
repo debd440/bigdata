@@ -7,7 +7,7 @@ object GroupByTest {
 
   def main(args: Array[String]): Unit = {
 
-    var sparkConfig = new SparkConf().setMaster("local").setAppName("BroadcastTest")
+    var sparkConfig = new SparkConf().setMaster("local").setAppName("GroupByTest")
     var sparkContext = new SparkContext(sparkConfig)
     sparkContext.setLogLevel("info")
 

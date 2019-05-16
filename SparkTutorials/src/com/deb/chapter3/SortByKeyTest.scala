@@ -3,12 +3,12 @@ package com.deb.chapter3
 import org.apache.spark.SparkConf
 import org.apache.spark.SparkContext
 
-object ReduceByKeyTest {
+object SortByKeyTest {
 
   //Paird RDDs- Sort based on key
   def main(args: Array[String]): Unit = {
 
-    var sparkConfig = new SparkConf().setMaster("local").setAppName("BroadcastTest")
+    var sparkConfig = new SparkConf().setMaster("local").setAppName("SortByKeyTest")
     var sparkContext = new SparkContext(sparkConfig)
     sparkContext.setLogLevel("info")
 
