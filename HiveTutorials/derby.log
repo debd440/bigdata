@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Sat Jun 01 16:27:42 IST 2019:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.14.1.0 - (1808820): instance a816c00e-016b-12b0-231f-0000077a8330 
+on database directory /home/debdutta/workspace/bigdata/HiveTutorials/metastore_db with class loader sun.misc.Launcher$AppClassLoader@73d16e93 
+Loaded from file:/home/debdutta/MavenRepository/org/apache/derby/derby/10.14.1.0/derby-10.14.1.0.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_131-b11
+user.dir=/home/debdutta/workspace/bigdata/HiveTutorials
+os.name=Linux
+os.arch=amd64
+os.version=4.4.0-148-generic
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
