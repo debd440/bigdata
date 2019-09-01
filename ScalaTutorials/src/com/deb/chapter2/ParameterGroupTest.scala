@@ -22,7 +22,7 @@ object ParameterGroupTest {
     println(s"Total cost for Mango in Goa ${partialCost(10)(0.2)}")
   }
 
-  def totalCost(item: String)(quantity: Int)(discount: Double): Double = {
+  def totalCost(item: String)(quantity: Int)(discount: Double=5): Double = {
 
     println(s"Calculating total cost for $quantity $item with ${discount * 100}% discount")
     val totalCost = 2.50 * quantity

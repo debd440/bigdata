@@ -2,7 +2,7 @@ package com.deb.chapter3
 
 class Student {
 
-  def print = {
+  def print() = {
     println("Inside Student Class Print Method: Default Constructor")
   }
 
@@ -12,7 +12,7 @@ class Student {
   }
 }
 
-object Strudent {
+object Student {
 
   def apply: Student = {
     new Student

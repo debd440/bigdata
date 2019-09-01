@@ -19,5 +19,9 @@ object ClassTest {
     var department2 = new Department("English", 50, "ENG")
     student2.print
     department2.print
+
+    var std = Student
+    std.apply.print()
+
   }
 }

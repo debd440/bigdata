@@ -16,4 +16,4 @@ object CaseClassTest {
   }
 }
 
-case class Car(model: String, price: Int)
+case class Car( var model: String, price: Int)
