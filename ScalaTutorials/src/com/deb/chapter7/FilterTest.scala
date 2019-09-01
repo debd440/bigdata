@@ -33,5 +33,10 @@ object FilterTest {
     res.foreach(data => {
       println(s"The Passing Marks Are: $data")
     })
+
+    var result1 = marks.filterNot(item => {
+      item>45
+    })
+    result1.foreach(println)
   }
 }

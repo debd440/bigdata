@@ -43,7 +43,7 @@ object FutureTest {
   }
 
   def calculatePrice(discount: Int, basePrice: Int): Future[Int] = Future {
-    // assume some long running database operation
+    // assume some long running database0  operation
     println("Calculating Price")
     basePrice - discount
   }
