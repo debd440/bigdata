@@ -11,4 +11,4 @@ pluginManagement {
 		}
 	}
 }
-rootProject.name = 'SpringTutorials'
+rootProject.name = 'SpringApiTutorials'

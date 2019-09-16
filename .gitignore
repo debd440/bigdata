@@ -1,0 +1,11 @@
+bigdata-tutorials/target
+playtutorials/log
+playtutorials/project
+playtutorials/target
+ScalaTutorials/out
+ScalaTutorials/.idea
+SparkTutorials/target
+SparkTutorials/project
+SparkTutorials/.idea
+SparkTutorials/bin/**
+
