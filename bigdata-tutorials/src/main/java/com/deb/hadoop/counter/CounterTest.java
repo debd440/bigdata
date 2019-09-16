@@ -37,10 +37,14 @@ public class CounterTest {
 			FileInputFormat.addInputPath(job, new Path("/user/root/input/demo.txt"));
 			FileOutputFormat.setOutputPath(job, new Path("/user/root/output/counter/"));
 
-			boolean result =job.waitForCompletion(true);
-			System.out.println("Counter Data Received:  "
-					+ job.getCounters().findCounter(CounterEnum.NO_OF_WORD).getValue());
-			System.out.println("Batch Job Result: "+result);
+			boolean result = job.waitForCompletion(true);
+			System.out.println(
+					"Counter Data Received:  " + job.getCounters().findCounter(CounterEnum.NO_OF_WORD).getValue());
+
+			System.out.println("No of Times Mapper Executed  "
+					+ job.getCounters().findCounter(CounterEnum.NO_OF_MAP_EXECUTION).getValue());
+
+			System.out.println("Batch Job Result: " + result);
 		} catch (IOException | ClassNotFoundException | InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
