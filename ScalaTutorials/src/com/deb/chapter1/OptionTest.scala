@@ -17,6 +17,7 @@ object OptionTest {
     var item1: Option[String] = None
     println(s"Is Value Available: ${item1.isDefined}")
     println(s"The Item1 Is: ${item1}")
+    println(s"${item1.getOrElse("None Received")}")
 
     //Example 3
     println("*****************************")

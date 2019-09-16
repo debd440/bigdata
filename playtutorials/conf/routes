@@ -32,8 +32,8 @@ PUT      /apis/student                com.deb.b2c.controllers.StudentController.
 GET      /apis/student/:id            com.deb.b2c.controllers.StudentController.getStudent(id: Int)
 GET      /apis/student                com.deb.b2c.controllers.StudentController.getAllStudent()
 DELETE   /apis/student/:id                com.deb.b2c.controllers.StudentController.deleteStudent(id:Int)
-
-
+POST    /apis/student/search        com.deb.b2c.controllers.StudentController.searchStudent()
+GET     /apis/student/custom/:id     com.deb.b2c.controllers.StudentController.getCustomStudent(id: Int)
 
 
 # Map static resources from the /public folder to the /assets URL path
