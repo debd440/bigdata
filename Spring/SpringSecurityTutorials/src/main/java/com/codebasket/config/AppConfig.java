@@ -22,8 +22,8 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private RestAuthentication restAuthentication;
 
-	@Autowired
-	private CustomAccessDeniedHandler customAccessDeniedHandler;
+	//@Autowired
+	//private CustomAccessDeniedHandler customAccessDeniedHandler;
 
 	//Configure in memory authentication
 	@Override
@@ -41,7 +41,8 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(final HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests().and().exceptionHandling()
-				.accessDeniedHandler(customAccessDeniedHandler).authenticationEntryPoint(restAuthentication).and()
+				//.accessDeniedHandler(customAccessDeniedHandler)
+				.authenticationEntryPoint(restAuthentication).and()
 				.authorizeRequests().antMatchers("/healthcheck/*").hasRole("ADMIN") // Place secure uri under this
 				.anyRequest().authenticated().and().formLogin()
 				.successHandler(new SimpleUrlAuthenticationSuccessHandler())

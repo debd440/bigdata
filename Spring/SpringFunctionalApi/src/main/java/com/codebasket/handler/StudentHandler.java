@@ -1,7 +1,11 @@
 package com.codebasket.handler;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON;
+
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.BodyInserters;
@@ -12,7 +16,6 @@ import com.codebasket.model.StudentTo;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import static org.springframework.http.MediaType.APPLICATION_JSON;
 
 @Component
 public class StudentHandler {
@@ -43,10 +46,10 @@ public class StudentHandler {
 	}
 
 	private Mono<Void> saveStudent(Mono<StudentTo> StudentTo) {
-		Mono<StudentTo> StudentToMono = StudentTo.doOnNext(value -> {
+		Mono<StudentTo> studentToMono = StudentTo.doOnNext(value -> {
 			studentList.put(("" + (studentList.keySet().size() + 1)), value);
 		});
-		return StudentToMono.then();
+		return studentToMono.then();
 	}
 
 	// Expose Public Method
@@ -57,19 +60,38 @@ public class StudentHandler {
 		return ServerResponse.ok().body(StudentTo, StudentTo.class);
 	}
 
+	// Path Param
 	public Mono<ServerResponse> getStudent(ServerRequest request) {
 		System.out.println("*********************Accepting Handler**************************");
 		String id = request.pathVariable("id");
 		Mono<ServerResponse> notFound = ServerResponse.notFound().build();
-		Mono<StudentTo> StudentToMono = result(id);
-		return StudentToMono.flatMap(StudentTo -> ServerResponse.ok().contentType(APPLICATION_JSON)
+		Mono<StudentTo> studentToMono = result(id);
+		return studentToMono.flatMap(StudentTo -> ServerResponse.ok().contentType(APPLICATION_JSON)
 				.body(BodyInserters.fromObject(StudentTo))).switchIfEmpty(notFound);
 	}
 
+	// Post Request
 	public Mono<ServerResponse> saveStudent(ServerRequest request) {
 		System.out.println("in create StudentTo");
-		Mono<StudentTo> StudentTo = request.bodyToMono(StudentTo.class);
-		return ServerResponse.ok().build(saveStudent(StudentTo));
+		Mono<StudentTo> studentTo = request.bodyToMono(StudentTo.class);
+		saveStudent(studentTo);
+		return ServerResponse.ok().build();
+	}
+
+	//http://localhost:8080/api/v2/react/query-param?name=B2C
+	// Query Param
+	public Mono<ServerResponse> queryParam(ServerRequest request) {
+		System.out.println("*********************Accepting Handler**************************");
+		Optional<String> name = request.queryParam("name");
+		return ServerResponse.ok().body(BodyInserters.fromObject("Query Param Received: " + name.get()));
+	}
+
+	// Headers
+	public Mono<ServerResponse> header(ServerRequest request) {
+		System.out.println("in Header Service: " + request.methodName());
+		List<String> header = request.headers().header("X-APP-ID");
+
+		return ServerResponse.ok().body(BodyInserters.fromObject("Header Param Received: " + header.get(0)));
 	}
 
 }

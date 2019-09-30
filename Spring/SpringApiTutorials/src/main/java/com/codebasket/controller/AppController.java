@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -102,5 +103,13 @@ public class AppController {
 	public ResponseEntity<StudentTo> retrieve(@PathVariable String id) {
 		StudentTo student = new StudentTo("Rahul", "Mumbai");
 		return new ResponseEntity<>(student, HttpStatus.OK);
+	}
+
+	// Request Header
+	// URL: http://localhost:8080/api/v1/header/12
+	@RequestMapping(value = "header/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> header(@RequestHeader("X-USER_ID") String userId, @PathVariable String id) {
+		return new ResponseEntity<>("Header Method is working for Id: " + id + " & X-USER_ID: " + userId,
+				HttpStatus.OK);
 	}
 }
