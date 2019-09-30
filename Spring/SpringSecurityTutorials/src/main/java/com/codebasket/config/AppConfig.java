@@ -12,7 +12,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 
-import com.codebasket.security.CustomAccessDeniedHandler;
 import com.codebasket.security.RestAuthentication;
 
 @Configuration
@@ -22,10 +21,7 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private RestAuthentication restAuthentication;
 
-	//@Autowired
-	//private CustomAccessDeniedHandler customAccessDeniedHandler;
-
-	//Configure in memory authentication
+	// Configure in memory authentication
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		String username = "admin";
@@ -41,9 +37,9 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(final HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests().and().exceptionHandling()
-				//.accessDeniedHandler(customAccessDeniedHandler)
-				.authenticationEntryPoint(restAuthentication).and()
-				.authorizeRequests().antMatchers("/healthcheck/*").hasRole("ADMIN") // Place secure uri under this
+				// .accessDeniedHandler(customAccessDeniedHandler)
+				.authenticationEntryPoint(restAuthentication).and().authorizeRequests().antMatchers("/healthcheck/*")
+				.hasRole("ADMIN") // Place secure uri under this
 				.anyRequest().authenticated().and().formLogin()
 				.successHandler(new SimpleUrlAuthenticationSuccessHandler())
 				.failureHandler(new SimpleUrlAuthenticationFailureHandler()).and().httpBasic().and().logout();

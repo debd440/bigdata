@@ -1,5 +1,7 @@
 package com.codebasket.controller;
 
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -111,5 +113,15 @@ public class AppController {
 	public ResponseEntity<String> header(@RequestHeader("X-USER_ID") String userId, @PathVariable String id) {
 		return new ResponseEntity<>("Header Method is working for Id: " + id + " & X-USER_ID: " + userId,
 				HttpStatus.OK);
+	}
+
+	// Post Request With JSON Array
+	// URL: http://localhost:8080/api/v1/student/array
+	// Request: [{"name":"Rahul","city":"BLR"},{"name":"Sachin","city":"MUM"}]
+	@RequestMapping(value = "student/array", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<String> insertArray(@RequestBody List<StudentTo> request) {
+		
+		request.stream().forEach(System.out::println);
+		return new ResponseEntity<>("Multi Param Value Received", HttpStatus.OK);
 	}
 }

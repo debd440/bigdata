@@ -26,7 +26,5 @@ public class ReactRouter {
 				.andRoute(POST("/api/v2/react/student/"), studentHandler::saveStudent)
 				.andRoute(GET("/api/v2/react/query-param"), studentHandler::queryParam)
 				.andRoute(GET("/api/v2/react/header/"), studentHandler::header);
-
 	}
-
 }
