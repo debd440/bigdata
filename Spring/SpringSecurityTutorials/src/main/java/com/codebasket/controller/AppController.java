@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class AppController {
 
+	
 	@RequestMapping(value = "/healthcheck", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public ResponseEntity<Map<String, String>> healthcheck() {
@@ -25,6 +26,15 @@ public class AppController {
 	@RequestMapping(value = "/check", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public ResponseEntity<Map<String, String>> check() {
+
+		Map<String, String> healthCheck = new HashMap<>();
+		healthCheck.put("methodName", "check");
+		return new ResponseEntity<>(healthCheck, HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/noAuth", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public ResponseEntity<Map<String, String>> item() {
 
 		Map<String, String> healthCheck = new HashMap<>();
 		healthCheck.put("methodName", "check");

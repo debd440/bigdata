@@ -37,9 +37,9 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(final HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests().and().exceptionHandling()
-				// .accessDeniedHandler(customAccessDeniedHandler)
-				.authenticationEntryPoint(restAuthentication).and().authorizeRequests().antMatchers("/healthcheck/*")
-				.hasRole("ADMIN") // Place secure uri under this
+				.authenticationEntryPoint(restAuthentication).and().authorizeRequests()
+				.antMatchers("/healthcheck").hasRole("ADMIN") // Place secure uri under this
+				.antMatchers("/check").hasRole("USER") 
 				.anyRequest().authenticated().and().formLogin()
 				.successHandler(new SimpleUrlAuthenticationSuccessHandler())
 				.failureHandler(new SimpleUrlAuthenticationFailureHandler()).and().httpBasic().and().logout();

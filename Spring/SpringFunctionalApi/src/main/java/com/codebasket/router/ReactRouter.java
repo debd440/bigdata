@@ -22,9 +22,10 @@ public class ReactRouter {
 
 		System.out.println("*********************Accepting Router**************************");
 		return RouterFunctions.route(GET("/api/v2/react/student/{id}"), studentHandler::getStudent)
-				.andRoute(GET("/api/v2/react/student/"), studentHandler::getStudentList)
-				.andRoute(POST("/api/v2/react/student/"), studentHandler::saveStudent)
+				.andRoute(GET("/api/v2/react/student"), studentHandler::getStudentList)
+				.andRoute(POST("/api/v2/react/student"), studentHandler::saveStudent)
 				.andRoute(GET("/api/v2/react/query-param"), studentHandler::queryParam)
-				.andRoute(GET("/api/v2/react/header/"), studentHandler::header);
+				.andRoute(GET("/api/v2/react/header"), studentHandler::header)
+				.andRoute(POST("/api/v2/react/multi-value"), studentHandler::multiStudent);
 	}
 }

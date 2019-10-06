@@ -45,24 +45,33 @@ public class StudentHandler {
 		return Flux.fromStream(studentList.values().stream());
 	}
 
-	private Mono<Void> saveStudent(Mono<StudentTo> StudentTo) {
-		Mono<StudentTo> studentToMono = StudentTo.doOnNext(value -> {
+	private Mono<Void> saveStudent(Mono<StudentTo> studentTo) {
+
+		System.out.println("Inside Save Student");
+		studentTo.subscribe(value -> {
+			System.out.println("Received Value: Name: " + value.getName() + " City: " + value.getCity());
 			studentList.put(("" + (studentList.keySet().size() + 1)), value);
 		});
-		return studentToMono.then();
+
+		return null;
+	}
+
+	private Mono<Void> saveMultipleStudent(Flux<StudentTo> studentTo) {
+
+		System.out.println("Inside Save Multiple Student");
+		studentTo.subscribe(value -> {
+			System.out.println("Received Value: Name: " + value.getName() + " City: " + value.getCity());
+			studentList.put(("" + (studentList.keySet().size() + 1)), value);
+		});
+
+		return null;
 	}
 
 	// Expose Public Method
-	public Mono<ServerResponse> getStudentList(ServerRequest request) {
-
-		System.out.println("*********************Accepting Handler**************************");
-		Flux<StudentTo> StudentTo = result();
-		return ServerResponse.ok().body(StudentTo, StudentTo.class);
-	}
-
 	// Path Param
+	// http://localhost:8080/api/v2/react/student/5
 	public Mono<ServerResponse> getStudent(ServerRequest request) {
-		System.out.println("*********************Accepting Handler**************************");
+		System.out.println("*********Get Student Methid called for Path Param**");
 		String id = request.pathVariable("id");
 		Mono<ServerResponse> notFound = ServerResponse.notFound().build();
 		Mono<StudentTo> studentToMono = result(id);
@@ -70,28 +79,48 @@ public class StudentHandler {
 				.body(BodyInserters.fromObject(StudentTo))).switchIfEmpty(notFound);
 	}
 
+	// http://localhost:8080/api/v2/react/student/
+	public Mono<ServerResponse> getStudentList(ServerRequest request) {
+
+		System.out.println("*********Get All Student List Method Called**");
+		Flux<StudentTo> StudentTo =  Flux.fromStream(studentList.values().stream());
+		return ServerResponse.ok().body(StudentTo, StudentTo.class);
+	}
+
 	// Post Request
+	// http://localhost:8080/api/v2/react/student/
+	// {"name":"Virat","city":"DLEHI"}
 	public Mono<ServerResponse> saveStudent(ServerRequest request) {
-		System.out.println("in create StudentTo");
+
+		System.out.println("*********Post Request Received for Single Object**");
 		Mono<StudentTo> studentTo = request.bodyToMono(StudentTo.class);
 		saveStudent(studentTo);
 		return ServerResponse.ok().build();
 	}
 
-	//http://localhost:8080/api/v2/react/query-param?name=B2C
 	// Query Param
+	// http://localhost:8080/api/v2/react/query-param?name=B2C
 	public Mono<ServerResponse> queryParam(ServerRequest request) {
-		System.out.println("*********************Accepting Handler**************************");
+		System.out.println("******Request Received For Query Param*****");
 		Optional<String> name = request.queryParam("name");
 		return ServerResponse.ok().body(BodyInserters.fromObject("Query Param Received: " + name.get()));
 	}
 
 	// Headers
+	// http://localhost:8080/api/v2/react/header/
 	public Mono<ServerResponse> header(ServerRequest request) {
-		System.out.println("in Header Service: " + request.methodName());
+		System.out.println("******Request Received For Header*****");
 		List<String> header = request.headers().header("X-APP-ID");
-
 		return ServerResponse.ok().body(BodyInserters.fromObject("Header Param Received: " + header.get(0)));
 	}
 
+	// Multiple Json
+	// http://localhost:8080/api/v2/react/multi-value/
+	// [{"name":"Virat","city":"DLEHI"},{"name":"Virat","city":"DLEHI"}]
+	public Mono<ServerResponse> multiStudent(ServerRequest request) {
+		System.out.println("******Request Received For Multi Value Json*****");
+		Flux<StudentTo> studentTo = request.bodyToFlux(StudentTo.class);
+		saveMultipleStudent(studentTo);
+		return ServerResponse.ok().body(BodyInserters.fromObject("Multiple Value Received: "));
+	}
 }
