@@ -12,7 +12,7 @@ object RangePartitionerTest {
     var sparkContext = new SparkContext(sparkConfig)
     sparkContext.setLogLevel("info")
 
-    var dataRDD = sparkContext.parallelize(1 to 10).map((_, 1))
+    var dataRDD = sparkContext.parallelize(1 to 20).map((_, 1))
     var resultRDD = dataRDD.partitionBy(new RangePartitioner(3, dataRDD))
     resultRDD.glom().collect()
     resultRDD.saveAsTextFile("file:///home/debdutta/HadoopEnviornment/data/output/rangepartitoner")

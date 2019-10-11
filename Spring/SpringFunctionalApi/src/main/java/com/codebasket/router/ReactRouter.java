@@ -2,6 +2,7 @@ package com.codebasket.router;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
 import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
+import static org.springframework.web.reactive.function.server.RequestPredicates.DELETE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +27,7 @@ public class ReactRouter {
 				.andRoute(POST("/api/v2/react/student"), studentHandler::saveStudent)
 				.andRoute(GET("/api/v2/react/query-param"), studentHandler::queryParam)
 				.andRoute(GET("/api/v2/react/header"), studentHandler::header)
-				.andRoute(POST("/api/v2/react/multi-value"), studentHandler::multiStudent);
+				.andRoute(POST("/api/v2/react/multi-value"), studentHandler::multiStudent)
+				.andRoute(DELETE("/api/v2/react/delete"), studentHandler::deleteData);
 	}
 }

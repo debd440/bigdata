@@ -1,7 +1,5 @@
 package com.codebasket.handler;
 
-import static org.springframework.http.MediaType.APPLICATION_JSON;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,15 +73,14 @@ public class StudentHandler {
 		String id = request.pathVariable("id");
 		Mono<ServerResponse> notFound = ServerResponse.notFound().build();
 		Mono<StudentTo> studentToMono = result(id);
-		return studentToMono.flatMap(StudentTo -> ServerResponse.ok().contentType(APPLICATION_JSON)
-				.body(BodyInserters.fromObject(StudentTo))).switchIfEmpty(notFound);
+		return ServerResponse.ok().body(studentToMono, StudentTo.class).switchIfEmpty(notFound);
 	}
 
 	// http://localhost:8080/api/v2/react/student/
 	public Mono<ServerResponse> getStudentList(ServerRequest request) {
 
 		System.out.println("*********Get All Student List Method Called**");
-		Flux<StudentTo> StudentTo =  Flux.fromStream(studentList.values().stream());
+		Flux<StudentTo> StudentTo = Flux.fromStream(studentList.values().stream());
 		return ServerResponse.ok().body(StudentTo, StudentTo.class);
 	}
 
@@ -122,5 +119,10 @@ public class StudentHandler {
 		Flux<StudentTo> studentTo = request.bodyToFlux(StudentTo.class);
 		saveMultipleStudent(studentTo);
 		return ServerResponse.ok().body(BodyInserters.fromObject("Multiple Value Received: "));
+	}
+	
+	public Mono<ServerResponse> deleteData(ServerRequest request) {
+		System.out.println("******Request Received For Deletion*****");
+		return ServerResponse.ok().body(BodyInserters.fromObject("Value Deleted"));
 	}
 }

@@ -1,5 +1,7 @@
 package com.codebasket.config;
 
+import java.util.Arrays;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,10 +10,11 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.converter.protobuf.ProtobufHttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication // Triggers EnableAutoConfiguration,ComponentScan & Configuration
 @EnableAutoConfiguration // Load configurations automatically
-@ComponentScan({ "com.codebasket.controller", "com.codebasket.proto" }) // Scan all folders
+@ComponentScan({ "com.codebasket.controller", "com.codebasket.proto", "com.codebasket.facade", "com.codebasket.helper" }) // Scan all folders
 public class CodeBasketApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {
@@ -27,6 +30,12 @@ public class CodeBasketApplication extends SpringBootServletInitializer {
     ProtobufHttpMessageConverter protobufHttpMessageConverter() {
         return new ProtobufHttpMessageConverter();
     }
+	
+	  @Bean
+      RestTemplate restTemplate(ProtobufHttpMessageConverter protobufHttpMessageConverter) {
+          return new RestTemplate(Arrays.asList(protobufHttpMessageConverter));
+      }
+
 	// Install Protobuf
 	// sudo apt-get install autoconf automake libtool curl make g++ unzip
 	// Download - https://github.com/protocolbuffers/protobuf/releases/tag/v3.6.1
