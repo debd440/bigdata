@@ -23,5 +23,7 @@ public class CodeBasketApplication extends SpringBootServletInitializer {
 		return builder.sources(CodeBasketApplication.class);
 	}
 	
-	//https://www.baeldung.com/spring-data-rest-relationships
+	//https://www.callicoder.com/hibernate-spring-boot-jpa-one-to-one-mapping-example/
+	//https://www.callicoder.com/hibernate-spring-boot-jpa-one-to-many-mapping-example/
+	//https://www.callicoder.com/hibernate-spring-boot-jpa-many-to-many-mapping-example/
 }

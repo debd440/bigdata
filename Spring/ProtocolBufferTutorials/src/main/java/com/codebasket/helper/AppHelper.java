@@ -12,7 +12,8 @@ public class AppHelper {
 	private AppFacade appFacade;
 	
 	public void getData() {
-		appFacade.getStudent();
+	//	appFacade.getStudent();
+		appFacade.getEmployee();
 	}
 
 }
